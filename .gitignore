@@ -19,6 +19,7 @@ npm-debug.log*
 db.sqlite3
 /media/
 /static/
+/env
 
 ### JetBrains
 .idea/
