@@ -2,7 +2,7 @@ from django import template
 
 from ..models import Menu
 
-register = template.Library ()
+register = template.Library()
 
 
 @register.simple_tag()
