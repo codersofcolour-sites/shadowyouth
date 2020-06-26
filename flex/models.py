@@ -21,7 +21,7 @@ class FlexPage(Page):
             ("simple_richtext", blocks.SimpleRichtextBlock()),
             ("cards", blocks.CardBlock()),
         ],
-        null=True,
+        default="",
         blank=True,
     )
 
