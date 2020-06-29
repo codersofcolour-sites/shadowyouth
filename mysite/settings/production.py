@@ -3,6 +3,13 @@ import dj_database_url
 
 from .base import *
 
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+sentry_sdk.init(
+    dsn=os.environ['SENTRY_DSN'],
+    integrations=[DjangoIntegration()]
+)
+
 
 env = os.environ.copy()
 SECRET_KEY = env['SECRET_KEY']

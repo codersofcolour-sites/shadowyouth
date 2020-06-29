@@ -16,7 +16,7 @@ from streams import blocks
 class HomePage(Page):
     templates = "home/hompage_page.html"
     banner_title = models.CharField(max_length = 100, blank = False, null = True)
-    banner_subtitle = RichTextField(features = ["bold", "italic"], null = True, blank=True)
+    banner_subtitle = RichTextField(features = ["bold", "italic", "center"], null = True, blank=True)
     banner_image = models.ForeignKey(
         "wagtailimages.Image", 
         null = True,
@@ -32,6 +32,19 @@ class HomePage(Page):
         related_name = "+",
     )
     content = StreamField([("cta", blocks.CTABlock())], null=True, blank=True)
+    
+    content = StreamField(
+        [
+            ("title_and_text", blocks.TitleAndTextBlock()),
+            ("full_richtext", blocks.RichtextBlock()),
+            ("simple_richtext", blocks.SimpleRichtextBlock()),
+            ("cards", blocks.CardBlock()),
+            ("cta", blocks.CTABlock()),
+        ],
+        default="",
+        blank=True,
+    )
+    
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [
@@ -39,23 +52,14 @@ class HomePage(Page):
                 FieldPanel("banner_subtitle"),
                 ImageChooserPanel("banner_image"),
                 PageChooserPanel("banner_cta"),
+                StreamFieldPanel("content"),
             ],
             heading="Banner Options",
         
         ),
-        StreamFieldPanel("content"),
+       
     ]
-    content = StreamField(
-        [ 
-            ("title_and_text", blocks.TitleAndTextBlock()),
-            ("full_richtext", blocks.RichtextBlock()),
-            ("simple_richtext", blocks.SimpleRichtextBlock()),
-            ("cards", blocks.CardBlock()),
-            ("cta", blocks.CTABlock()),
-        ],
-        null = True, 
-        blank =True, 
-    )
-class Meta:
+    
+    class Meta:
         verbose_name = "Home Page"
         verbose_name_plural = "Home Pages"
