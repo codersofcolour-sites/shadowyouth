@@ -5,9 +5,10 @@
 
 {% block content %}
     <h1>{{ page.title }}</h1>
-    <div class="intro justify-content-center ">{{ page.intro|richtext }} </div>
+    <div class="container text-center"> 
+        <div class="intro justify-content-center">{{ page.intro|richtext }} </div>
     {% for post in page.get_children %}
         <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
         {{ post.specific.date }}
-    {% endfor %}
+    {% endfor %}   
 {% endblock %}
