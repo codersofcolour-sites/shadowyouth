@@ -20,13 +20,18 @@
             font-size: 80%;
         }
     </style>
-
-    <div class="container mt-5 mb-5">
-        <h1>{{ page.title }}</h1>
-        <p>
-            {{ self.intro|richtext }}
-        </p>
-
+    <div class="jumbotron jumbotron-fluid" style="background-color:darkorange;">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <h1 class="display-4"> {{ self.title }}</h1> 
+                    <div class="lead">{{ self.subtitle }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="container mt-5 mb-5">
+       
         <form action="{% pageurl page %}" method="POST">
             {% csrf_token %}
             <ul class="contact-form">
